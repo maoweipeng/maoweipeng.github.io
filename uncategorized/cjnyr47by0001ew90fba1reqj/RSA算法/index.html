@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Archives: 2018/10 | 一个有梦想的攻城狮</title>
+  <title>RSA算法 | 一个有梦想的攻城狮</title>
   <meta name="author" content="maoweipeng">
 
   
@@ -14,7 +14,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="RSA算法">
   <meta property="og:site_name" content="一个有梦想的攻城狮">
 
   
@@ -57,49 +57,58 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">2018/10</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-10-28T15:07:40.000Z"><a href="/uncategorized/cjnyr47by0001ew90fba1reqj/RSA算法/">2018-10-28</a></time>
+      
+      
+  
+    <h1 class="title">RSA算法</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+        <p>RSA 算法是一个很重要的加密算法，在有网络通信的地方基本都有 RSA 算法。RSA 算法的思想很容易理解，但是计算量却十分庞大，这也是为什么说 RSA 算法很安全的原因。我们通过一个简单的例子来认识一下 RSA 算法。<br><a id="more"></a></p>
+<p>首先 RSA 算法要生成一个密钥对，密钥生成的步骤：</p>
+<p>第一步：RSA 的首要任务是要选两个大素数 p和q。比如我选择 3 和 11（实际的 RSA 算法选择的素数是很大的，这里为了方便演示，这里选择两个很小的素数）。</p>
+<p>第二步：计算 n = pq，n 就是密钥长度，这个值越大越安全。即 n = 3 * 11 = 33，33 写成二进制的形式是 100001，共六位，所以这里的密钥长度为 6。目前能破解的 RSA 密钥长度为 768 位。实际应用中，RSA 密钥长度一般是 1024 位，有些重要场合甚至是 2048 位。</p>
+<p>第三步：计算 n 的欧拉函数 ø(n) = (p-1)(q-1)；即 ø(n) =（3-1）*（11-1）= 20。</p>
+<p>第四步：选 e，e 满足 1 &lt; e &lt; ø(n)，并且 gcd[e,ø(n)] = 1（即 e 与 ø(n) 互为素数），这里选 e = 7。</p>
+<p>第五步：求 d，根据公式 e<em>d ≡ 1mod[ø(n)] 可得 7</em>d ≡ 1 mod 20，即 7d – 1 = 20β，（β∈Z），即 7d – 20β = 1。相当于求解二元一次方程 7x – 20y = 1 ，解得 x = 3 ，y = 1 ，即 d = 3。</p>
+<p>第六步：将 n 和 e 封装成公钥，n 和 d 封装成私钥。所以公钥为（33，7）私钥为（33，3），公钥公布给所有要给自己发信息的用户，私钥自己保密</p>
+<p>算出公钥和私钥后就可以进行加密运算了。这里有两个重要的公式<br>加密公式为：C = M^e^mod(n)<br>解密公式为：M = C^d^mod(n)</p>
+<p>其中C为密文，M 为明文</p>
+<p>例如我要对 19 这个明文进行加密，C=19^7^ mod 33 = 13，即明文 19 的密文位 13</p>
+<p>对方接收到密文后通过解密公式 M = C^d^ mod(n) 可得，M = 13^3^ mod 33 = 19</p>
 
-  <div class="archive">
+      
+    </div>
     
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2018-10-30T15:23:02.000Z"><a href="/uncategorized/cjnyr47by0003ew90y8sucmm1/自己动手搭建梯子/">2018-10-30</a></time>
-            
-              <h1 class="title"><a href="/uncategorized/cjnyr47by0003ew90y8sucmm1/自己动手搭建梯子/">自己动手搭建梯子</a></h1>
-            
-          </header>
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
         </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2018-10-28T15:07:40.000Z"><a href="/uncategorized/cjnyr47by0001ew90fba1reqj/RSA算法/">2018-10-28</a></time>
-            
-              <h1 class="title"><a href="/uncategorized/cjnyr47by0001ew90fba1reqj/RSA算法/">RSA算法</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2018-10-28T14:09:40.000Z"><a href="/uncategorized/cjnyr47bj0000ew90hsxpxzgm/Vmware不能上网的一种情况/">2018-10-28</a></time>
-            
-              <h1 class="title"><a href="/uncategorized/cjnyr47bj0000ew90hsxpxzgm/Vmware不能上网的一种情况/">Vmware不能上网的一种情况</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/算法/">算法</a>
   </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
