@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="一个有梦想的攻城狮">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://maoweipeng.github.io">
+    <!--SEO-->
+
+    <meta name="keywords" content="算法">
+
+
+    <meta name="description" content="RSA 算法是一个很重要的加密算法，在有网络通信的地方基本都有 RSA 算法。RSA 算法的思想很容易理解，但是计算量却十分庞大，这也是为什么说 RSA 算法很安全的原因。我们通过一个简单的例子...">
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+
+    <!--Title-->
+
+
+<title>RSA算法 | 一个有梦想的攻城狮</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="一个有梦想的攻城狮" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+
+
+
+
+
+    
+
+</head>
+
+</html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header" style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="maoweipeng">
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!-- <h2 class="text-hide">一个有梦想的攻城狮</h2> -->
+            
+                <h2> 一个有梦想的攻城狮 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="https://maoweipeng.github.io">一个有梦想的攻城狮</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="RSA算法">
+            
+	            RSA算法
+            
+        </h1>
+        <div class="post-meta">
+    
+        <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+            
+        </span>
+    
+
+    
+        <span class="fa-wrap">
+            <i class="fa fa-tags"></i>
+            <span class="tags-meta">
+                
+                    <a class="tag-link" href="/tags/算法/">算法</a>
+                
+            </span>
+        </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/10/28</span>
+        </span>
+        
+    
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>RSA 算法是一个很重要的加密算法，在有网络通信的地方基本都有 RSA 算法。RSA 算法的思想很容易理解，但是计算量却十分庞大，这也是为什么说 RSA 算法很安全的原因。我们通过一个简单的例子来认识一下 RSA 算法。<br><a id="more"></a></p>
+<p>首先 RSA 算法要生成一个密钥对，密钥生成的步骤：</p>
+<p>第一步：RSA 的首要任务是要选两个大素数 p和q。比如我选择 3 和 11（实际的 RSA 算法选择的素数是很大的，这里为了方便演示，这里选择两个很小的素数）。</p>
+<p>第二步：计算 n = pq，n 就是密钥长度，这个值越大越安全。即 n = 3 * 11 = 33，33 写成二进制的形式是 100001，共六位，所以这里的密钥长度为 6。目前能破解的 RSA 密钥长度为 768 位。实际应用中，RSA 密钥长度一般是 1024 位，有些重要场合甚至是 2048 位。</p>
+<p>第三步：计算 n 的欧拉函数 ø(n) = (p-1)(q-1)；即 ø(n) =（3-1）*（11-1）= 20。</p>
+<p>第四步：选 e，e 满足 1 &lt; e &lt; ø(n)，并且 gcd[e,ø(n)] = 1（即 e 与 ø(n) 互为素数），这里选 e = 7。</p>
+<p>第五步：求 d，根据公式 e<em>d ≡ 1mod[ø(n)] 可得 7</em>d ≡ 1 mod 20，即 7d – 1 = 20β，（β∈Z），即 7d – 20β = 1。相当于求解二元一次方程 7x – 20y = 1 ，解得 x = 3 ，y = 1 ，即 d = 3。</p>
+<p>第六步：将 n 和 e 封装成公钥，n 和 d 封装成私钥。所以公钥为（33，7）私钥为（33，3），公钥公布给所有要给自己发信息的用户，私钥自己保密</p>
+<p>算出公钥和私钥后就可以进行加密运算了。这里有两个重要的公式<br>加密公式为：C = M^e mod(n)<br>解密公式为：M = C^d mod(n)</p>
+<p>其中C为密文，M 为明文</p>
+<p>例如我要对 19 这个明文进行加密，C=19^7 mod 33 = 13，即明文 19 的密文位 13</p>
+<p>对方接收到密文后通过解密公式 M = C^d mod(n) 可得，M = 13^3 mod 33 = 19</p>
+
+    </div>
+    
+        <div class="reward" ontouchstart="">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="/img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏会鼓励我写更多</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/10/30/自己动手搭建梯子/" class="pre-post btn btn-default" title="自己动手搭建代理">
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">自己动手搭建代理</span>
+        </a>
+    
+    
+        <a href="/2018/10/28/Vmware不能上网的一种情况/" class="next-post btn btn-default" title="Vmware不能上网的一种情况">
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Vmware不能上网的一种情况</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'R4PpU2dl8iSj1E7TdvXUPaxq-gzGzoHsz',
+            appKey: 'vxIh1zTWM6x2cT3HnuFSx0bV',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: 'zh-CN'.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <p>暂无目录</p>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2018
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
